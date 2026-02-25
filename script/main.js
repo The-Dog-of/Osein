@@ -1,10 +1,35 @@
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+const navbar = document.querySelector('.navbar');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(255, 255, 255, 0.9)';
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.05)';
+    } else {
+        navbar.style.background = 'rgba(255, 255, 255, 0.7)';
+        navbar.style.boxShadow = 'none';
+    }
+});
+
 const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
 };
 
-const observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
@@ -14,60 +39,9 @@ const observer = new IntersectionObserver((entries, observer) => {
     });
 }, observerOptions);
 
-const animatedElements = document.querySelectorAll('.hero-content, .hero-profile, .skill-card, .xp-card, h2, .subtitle');
-
-animatedElements.forEach((el, index) => {
+document.querySelectorAll('.glass-card, .section-title, .tech-stack, .stats-banner, .hero-content, .hero-image').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
-    el.style.transition = `all 0.8s cubic-bezier(0.1, 0.7, 0.1, 1) ${index * 0.1}s`;
+    el.style.transition = 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)';
     observer.observe(el);
 });
-
-const interactiveElements = document.querySelectorAll('.skill-card, .xp-card, .profile-ring');
-
-interactiveElements.forEach(el => {
-    el.addEventListener('mousemove', e => {
-        const rect = el.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = ((y - centerY) / centerY) * -6;
-        const rotateY = ((x - centerX) / centerX) * 6;
-        
-        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    });
-    
-    el.addEventListener('mouseleave', () => {
-        el.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-        el.style.transition = 'transform 0.5s cubic-bezier(0.1, 0.7, 0.1, 1)';
-    });
-    
-    el.addEventListener('mouseenter', () => {
-        el.style.transition = 'none';
-    });
-});
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-const discordBtn = document.querySelector('.discord-btn');
-if(discordBtn) {
-    discordBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Conexão estabelecida: Redirecionando para Osein...');
-    });
-}

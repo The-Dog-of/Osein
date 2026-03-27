@@ -438,7 +438,7 @@ main {
 
 .badge-admin { background: #FEE2E2; color: #DC2626; }
 .badge-mod { background: #E0F2FE; color: #0284C7; }
-
+.badge-tmod { background: #eefdde; color: #0eda29c0; }
 .server-stats {
     display: flex;
     background: #F8FAFC;
@@ -463,6 +463,27 @@ main {
     font-size: 0.85rem;
     color: var(--text-muted);
     font-weight: 500;
+}
+
+.btn-server {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background: rgba(14, 165, 233, 0.1);
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.btn-server:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
 }
 
 .tech-stack {

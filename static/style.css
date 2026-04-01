@@ -6,12 +6,36 @@
     --text-muted: #64748B;
     --bg-glass: rgba(255, 255, 255, 0.7);
     --border-glass: 1px solid rgba(255, 255, 255, 0.5);
+    --card-bg-solid: #FFFFFF;
+    --panel-bg: linear-gradient(135deg, #FFFFFF, rgba(255, 255, 255, 0.5));
+    --cta-bg: linear-gradient(135deg, #F0F9FF, #FFFFFF);
+    --icon-bg: #F0F9FF;
+    --icon-border: #BAE6FD;
+    --divider-color: #E2E8F0;
+    --server-stats-bg: #F8FAFC;
     --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
     --shadow-blue: 0 10px 25px -5px rgba(14, 165, 233, 0.4);
     --radius-md: 16px;
     --radius-lg: 24px;
     --gradient-blue: linear-gradient(135deg, #38BDF8, #0284C7);
+}
+
+:root[data-theme="dark"] {
+    --bg-main: #000000;
+    --text-dark: #F8FAFC;
+    --text-muted: #A1A1AA;
+    --bg-glass: rgba(10, 10, 10, 0.75);
+    --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+    --card-bg-solid: #0A0A0A;
+    --panel-bg: linear-gradient(135deg, #0A0A0A, rgba(10, 10, 10, 0.9));
+    --cta-bg: linear-gradient(135deg, #000000, #0A0A0A);
+    --icon-bg: #121212;
+    --icon-border: #27272A;
+    --divider-color: #27272A;
+    --server-stats-bg: #050505;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.6);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.8);
 }
 
 * {
@@ -28,6 +52,7 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .bg-glow {
@@ -60,6 +85,7 @@ body {
     -webkit-backdrop-filter: blur(12px);
     border-bottom: var(--border-glass);
     z-index: 1000;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-container {
@@ -98,12 +124,34 @@ body {
     color: var(--primary);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.theme-toggle-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
 .btn-outline {
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 600;
     padding: 0.6rem 1.5rem;
-    border: 2px solid #E2E8F0;
+    border: 2px solid var(--divider-color);
     border-radius: 50px;
     transition: all 0.3s ease;
 }
@@ -158,11 +206,12 @@ main {
     height: 380px;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid white;
+    border: 5px solid var(--card-bg-solid);
     box-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.4);
     position: relative;
     z-index: 5;
     background: transparent;
+    transition: border-color 0.3s ease;
 }
 
 .profile-pic {
@@ -176,15 +225,16 @@ main {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: white;
+    background: var(--card-bg-solid);
     padding: 8px 16px;
     border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-muted);
-    border: 1px solid #E2E8F0;
+    border: 1px solid var(--divider-color);
     box-shadow: var(--shadow-sm);
     margin-bottom: 2rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .dot {
@@ -233,7 +283,7 @@ main {
     align-items: center;
     gap: 10px;
     background: var(--primary);
-    color: white;
+    color: #FFFFFF;
     text-decoration: none;
     padding: 1rem 2rem;
     border-radius: 50px;
@@ -262,31 +312,32 @@ main {
     font-weight: 600;
     padding: 1rem 2rem;
     border-radius: 50px;
-    background: white;
-    border: 1px solid #E2E8F0;
+    background: var(--card-bg-solid);
+    border: 1px solid var(--divider-color);
     transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-    background: #F1F5F9;
-    border-color: #CBD5E1;
+    background: var(--bg-main);
+    border-color: var(--text-muted);
 }
 
 .stats-banner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.75);
+    background: var(--bg-glass);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: var(--border-glass);
     padding: 2rem 3rem;
     border-radius: 30px;
-    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-md);
     max-width: 85%;
     margin: -5rem auto 0;
     position: relative;
     z-index: 10;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .stat-item {
@@ -310,7 +361,8 @@ main {
 .divider {
     width: 1px;
     height: 60px;
-    background: #E2E8F0;
+    background: var(--divider-color);
+    transition: background-color 0.3s ease;
 }
 
 .section-title {
@@ -353,20 +405,21 @@ main {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
     border-color: rgba(14, 165, 233, 0.3);
-    background: white;
+    background: var(--card-bg-solid);
 }
 
 .icon-box {
     width: 60px;
     height: 60px;
-    background: #F0F9FF;
+    background: var(--icon-bg);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    border: 1px solid #BAE6FD;
+    border: 1px solid var(--icon-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .card-title {
@@ -400,13 +453,14 @@ main {
 .server-icon {
     width: 64px;
     height: 64px;
-    background: #F8FAFC;
-    border: 1px solid #E2E8F0;
+    background: var(--server-stats-bg);
+    border: 1px solid var(--divider-color);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .server-logo {
@@ -414,7 +468,8 @@ main {
     height: 64px;
     border-radius: 20px;
     object-fit: cover;
-    border: 1px solid #E2E8F0;
+    border: 1px solid var(--divider-color);
+    transition: border-color 0.3s ease;
 }
 
 .server-info {
@@ -439,12 +494,14 @@ main {
 .badge-admin { background: #FEE2E2; color: #DC2626; }
 .badge-mod { background: #E0F2FE; color: #0284C7; }
 .badge-tmod { background: #eefdde; color: #0eda29c0; }
+
 .server-stats {
     display: flex;
-    background: #F8FAFC;
+    background: var(--server-stats-bg);
     border-radius: 16px;
     padding: 1.5rem;
-    border: 1px solid #E2E8F0;
+    border: 1px solid var(--divider-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .stat-box {
@@ -481,7 +538,7 @@ main {
 
 .btn-server:hover {
     background: var(--primary);
-    color: white;
+    color: #FFFFFF;
     transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
 }
@@ -491,14 +548,15 @@ main {
 }
 
 .glass-panel {
-    background: linear-gradient(135deg, white, rgba(255,255,255,0.5));
-    border: 1px solid rgba(255,255,255,0.8);
+    background: var(--panel-bg);
+    border: var(--border-glass);
     border-radius: var(--radius-lg);
     padding: 4rem;
     display: flex;
     align-items: center;
     gap: 4rem;
     box-shadow: var(--shadow-md);
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .tech-content {
@@ -524,14 +582,14 @@ main {
 }
 
 .tag {
-    background: white;
+    background: var(--card-bg-solid);
     color: var(--text-dark);
     padding: 0.8rem 1.5rem;
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.95rem;
     box-shadow: var(--shadow-sm);
-    border: 1px solid #E2E8F0;
+    border: 1px solid var(--divider-color);
     transition: all 0.3s ease;
 }
 
@@ -551,19 +609,20 @@ main {
     margin: 0 auto;
     text-align: center;
     padding: 5rem 2rem;
-    background: linear-gradient(135deg, #F0F9FF, white);
-    border: 1px solid #BAE6FD;
+    background: var(--cta-bg);
+    border: 1px solid var(--icon-border);
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .cta-box h2 {
     font-size: 2.5rem;
-    color: #0369A1;
+    color: var(--primary);
     margin-bottom: 1rem;
     letter-spacing: -1px;
 }
 
 .cta-box p {
-    color: #0284C7;
+    color: var(--primary-hover);
     font-size: 1.2rem;
     max-width: 600px;
     margin: 0 auto 2.5rem;
